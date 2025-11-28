@@ -1,0 +1,38 @@
+CRC-12
+#include <stdio.h>
+
+int main() {
+    int data[200], crc[200], poly[13] = {1,0,0,0,0,0,0,1,1,1,0,1,1};
+    int n, i, j;
+
+    printf("Enter number of bits in the data: ");
+    scanf("%d", &n);
+
+    printf("Enter the data bits (0/1): ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &data[i]);
+        crc[i] = data[i];
+    }
+
+    for (i = n; i < n + 12; i++)
+        crc[i] = 0;
+
+    for (i = 0; i < n; i++) {
+        if (crc[i] == 1) {
+            for (j = 0; j < 13; j++)
+                crc[i + j] ^= poly[j];
+        }
+    }
+
+    printf("\nCRC-12 remainder: ");
+    for (i = n; i < n + 12; i++)
+        printf("%d", crc[i]);
+
+    printf("\nCRC-12 codeword: ");
+    for (i = 0; i < n; i++)
+        printf("%d", data[i]);
+    for (i = n; i < n + 12; i++)
+        printf("%d", crc[i]);
+
+    return 0;
+}
