@@ -1,0 +1,16 @@
+#include <stdio.h>
+ int main() {
+    int total, win;
+    printf("Enter total number of frames: ");
+    scanf("%d", &total);
+    printf("Enter window size: ");
+    scanf("%d", &win);
+    for (int i = 0; i < total; i++) {
+        printf("Frame %d sent\n", i);
+        if (i % 3 == 0 && i != 0)
+            printf("Frame %d lost → Selectively Resent\n", i);
+        else
+            printf("ACK %d received\n", i);
+    }
+    printf("All frames sent and acknowledged successfully!\n");
+ }
