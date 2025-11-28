@@ -1,87 +1,59 @@
+Hamming Code:
+
 #include <stdio.h>
-#include <math.h>
 
-int input[32];
-int code[32];
+int calcParity(int code[], int pos[], int size) {
 
-int ham_calc(int position, int c);
+int parity = 0;
 
-void main()
-{
-    int n, i, pn = 0, c, j, k;
+int i;
 
-    printf("Please enter the length of the Data Word: ");
-    scanf("%d", &n);
+for (i = 0; i< size; i++) ( parity ^= code[pos[i]];
 
-    printf("Please enter the Data Word: \n");
-    for (i = 0; i < n; i++)
-        scanf("%d", &input[i]);
+return parity;
 
-    /* find number of parity bits pn such that 2^pn >= n + pn + 1 */
-    while ((int)pow(2, pn) < n + pn + 1)
-        pn++;
+int main() {
 
-    c = pn + n;
+int data[4];
 
-    j = 0;
-    k = 0;
-    for (i = 0; i < c; i++) {
-        if (i == ((int)pow(2, k) - 1)) {
-            code[i] = 0;      /* placeholder for parity */
-            k++;
-        } else {
-            code[i] = input[j];
-            j++;
-        }
-    }
+int hammingCode[7];
 
-    /* calculate parity bits */
-    for (i = 0; i < pn; i++) {
-        int position = (int)pow(2, i);
-        int value = ham_calc(position, c);
-        code[position - 1] = value;
-    }
+int i;
 
-    printf("\nThe calculated Code Word is: ");
-    for (i = 0; i < c; i++)
-        printf("%d", code[i]);
-    printf("\n");
+for (i = 0; i<7; i++) ( hammingCode[i] = 0;
 
-    /* read received code word */
-    printf("Please enter the received Code Word:\n");
-    for (i = 0; i < c; i++)
-        scanf("%d", &code[i]);
-
-    /* compute error position */
-    {
-        int error_pos = 0;
-        for (i = 0; i < pn; i++) {
-            int position = (int)pow(2, i);
-            int value = ham_calc(position, c);
-            if (value != 0)
-                error_pos += position;
-        }
-
-        if (error_pos == 0)
-            printf("The received Code Word is correct.\n");
-        else
-            printf("Error at bit position: %d\n", error_pos);
-    }
 }
 
-int ham_calc(int position, int c)
-{
-    int count = 0, i, j;
-    i = position - 1;
-    while (i < c) {
-        for (j = i; j < i + position && j < c; j++) {
-            if (code[j] == 1)
-                count++;
-        }
-        i = i + 2 * position;
-    }
-    if (count % 2 == 0)
-        return 0;
-    else
-        return 1;
+printf("Enter 4 data bits (0 or 1):\n");
+
+for (i = 0; i<4; i++) { scanf("%d", &data[i]);
+
 }
+
+hammingCode[2] = data[0];
+
+hammingCode[4] = data[1];
+
+hammingCode[5] = data[2];
+
+hammingCode[6] = data[3];
+
+int p1[] = {2, 4, 6);
+
+int p2[] = {2, 5, 6);
+
+int p4[] = (4, 5, 6);
+
+hammingCode[0] = calcParity(hammingCode, p1, 3); hammingCode[1] = calcParity(hammingCode, p2, 3); hammingCode[3] = calcParity(hammingCode, p4, 3);
+
+printf("Generated 7-bit Hamming code: "); for (i = 0; i<7; i++) (
+
+}
+
+printf("%d", hammingCode[i]);
+
+}
+
+printf("\n");
+
+return 0;
