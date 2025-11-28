@@ -1,0 +1,43 @@
+CHARACTER STUFFING
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char a[100], b[200];
+    int i = 0, j = 0, n;
+
+    printf("Enter string: ");
+    scanf("%[^\n]s", a);
+
+    n = strlen(a);
+
+    b[j++] = 'd';
+    b[j++] = 'l';
+    b[j++] = 'e';
+    b[j++] = 's';
+    b[j++] = 't';
+
+    while (i < n) {
+        if (a[i] == 'd' && a[i+1] == 'l' && a[i+2] == 'e') {
+            b[j++] = 'd';
+            b[j++] = 'l';
+            b[j++] = 'e';
+            b[j++] = 'l';
+            b[j++] = 'i';
+            b[j++] = 't';
+            i += 3;
+        } else {
+            b[j++] = a[i++];
+        }
+    }
+
+    b[j++] = 'd';
+    b[j++] = 'l';
+    b[j++] = 'e';
+    b[j++] = 'e';
+    b[j++] = 'n';
+    b[j] = '\0';
+
+    printf("Frame after stuffing: %s\n", b);
+    return 0;
+}
